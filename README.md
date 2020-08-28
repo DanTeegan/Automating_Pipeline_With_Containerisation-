@@ -1,6 +1,6 @@
 
 ## Automating Pipeline With Containerisation
-## Insalling Jenkins on a EC2 instance. JE111
+## Insalling Jenkins on a EC2 instance.
 
 ##### First we must spin up a EC2 intances on AWS (T2-Micro). This will be our main jenkins instance. Set the security group inbound rules as follows (We will make adjustments to this later.
 
