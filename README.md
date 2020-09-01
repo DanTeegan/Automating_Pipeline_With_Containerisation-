@@ -137,3 +137,58 @@ sudo systemctl status docker
 - Then click add credentials on the left hand side
 - We will then add the username, password and id (the string we will uses to reference that credential within the pipeline)
 
+### Creating a Docker repo
+
+- Before we create the pipeline we want to create a repo that we will send the image
+- This can be done on docker hub
+- On this instance we will call the repo ''jenkins-docker-pipeline-project''
+
+### Script used for the pipeline
+```
+pipeline {
+  environment {
+    registry = "jenkins-docker-pipeline-project"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/DanTeegan/Automating_Pipeline_With_Containerisation-'
+      }
+    }
+    // stage('Build') {
+    //   steps {
+    //      sh 'npm install'
+    //   }
+    // }
+    // stage('Test') {
+    //   steps {
+    //     sh 'npm test'
+    //   }
+    // }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
+}
+```
