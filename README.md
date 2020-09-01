@@ -120,3 +120,20 @@ sudo apt-get install -y docker-ce
 ```
 sudo systemctl status docker
 ```
+
+### Creating a continuous deloyment job
+
+- Now that we have created an instance to hold our containers we can now automate the deployment phase with our CD pipeline job
+
+- We must install docker pipeline plugin
+
+- When creating the job, we want it to be triggered if our CI job is successful
+
+### Adding your Docker credentials
+
+- Click on the jenkins link found under 'stores scoped to jenkins'
+
+- Click global credentials
+- Then click add credentials on the left hand side
+- We will then add the username, password and id (the string we will uses to reference that credential within the pipeline)
+
