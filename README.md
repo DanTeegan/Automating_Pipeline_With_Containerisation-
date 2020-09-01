@@ -77,3 +77,46 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ![](images/10.png)
 
+### Creating a Jenkins slave node
+
+##### Creating another EC2 instance for a Jenkins slave node. First you want to create a folder called jenkins
+```
+sudo mkdir jenkins
+sudo wget http://34.247.181.80:8080/jnlpJars/agent.jar
+```
+##### This will download a agent.jar file. Now we need to create a Jenkins user that we can switch too. 
+```
+sudo adduser jenkins
+sudu su jenkins
+```
+
+### Creating a Docker instance
+
+##### No we can create another instance to be used by Docker. To do this you can manually create a EC2 instance, ssh in and install the following  dependencies.
+```
+curl -fsSL https://download.docker.com/linux/
+```
+```
+ubuntu/gpg | sudo apt-key add -
+```
+```
+sudo add-apt-repository "deb [arch=amd64] 
+```
+```
+https://download.docker.com/linux/ubuntu 
+```
+```
+$(lsb_release -cs) stable"
+```
+```
+sudo apt-get update
+```
+```
+apt-cache policy docker-ce
+```
+```
+sudo apt-get install -y docker-ce
+```
+```
+sudo systemctl status docker
+```
