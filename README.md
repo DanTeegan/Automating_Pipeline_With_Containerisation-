@@ -192,3 +192,19 @@ pipeline {
   }
 }
 ```
+
+### Creating a googlescript DockerHub webhook to send emails
+```
+function doGet(e){
+  return HtmlService.createHtmlOutput("request received");
+}
+
+function doPost(e) {
+    var emailAddress = 'ENTER EMAIL HERE @ EMAIL.COM'
+    var message = 'ENTER MESSAGE HERE '
+    var subject = 'Sending Emails From Google Scripts';
+    MailApp.sendEmail(emailAddress, subject, message);
+    return HtmlService.createHtmlOutput()("post request received");
+  
+}
+```
